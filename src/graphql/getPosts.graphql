@@ -1,0 +1,14 @@
+query getPosts($page: Int!) {
+  posts(options: {paginate:{page: $page, limit: 20}}) {
+    data {
+      title
+      body
+      user {
+        name
+      }
+    }
+    meta{
+      totalCount
+    }
+  }
+}

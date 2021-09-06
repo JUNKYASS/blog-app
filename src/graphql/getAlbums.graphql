@@ -1,0 +1,20 @@
+query getAlbums($page: Int!) {
+  albums(options: {paginate: {page: $page, limit: 20}}) {
+    data {
+      title
+      user {
+        name
+      }
+      photos {
+        data {
+          title
+          url
+          thumbnailUrl
+        }
+      }
+    }
+    meta{
+      totalCount
+    }
+  }
+}

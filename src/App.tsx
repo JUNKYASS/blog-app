@@ -1,21 +1,14 @@
 import React from 'react';
-import { useGetUserQuery } from './graphql/generated';
+import { Header } from './components/Header';
+import { Main } from './components/Main';
+import './style.scss';
 
-const { data, loading, error } = useGetUserQuery({
-  variables: {
-    id: '1' // value for 'id'
-  },
- });
-
-
-
-const App: React.FC = () => {
-  console.log(data);
-  console.log(loading);
-  console.log(error);
-
+const App: React.FC = () => {  
   return (
-    <div>Hi, i'll try to use GraphQL today!:)</div>
+    <React.Fragment>
+      <Header />
+      <Main />
+    </React.Fragment> 
   );
 };
 
