@@ -21,10 +21,7 @@
         "@typescript-eslint"
     ],
     "rules": {
-        // "indent": [
-        //     "error",
-        //     2
-        // ],
+        "@typescript-eslint/no-inferrable-types": 0,
         "@typescript-eslint/no-explicit-any": 0,
         "linebreak-style": [
             "error",

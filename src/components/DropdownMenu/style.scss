@@ -31,8 +31,9 @@
 
       color: #404040;
 
-      &.active, &:hover {
-        background-color: #F2F2F2;
+      &.active,
+      &:hover {
+        background-color: #f2f2f2;
       }
     }
   }

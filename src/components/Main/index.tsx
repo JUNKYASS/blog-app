@@ -5,10 +5,10 @@ import { useRoutes } from '../../routes';
 
 const Main: React.FC = () => {
 
-  return ( 
+  return (
     <main>
-      <div className="inner container-centered container"> 
-        {useRoutes()} 
+      <div className="inner container-centered container">
+        {useRoutes()}
       </div>
     </main>
   );

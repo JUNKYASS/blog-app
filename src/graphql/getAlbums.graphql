@@ -1,12 +1,14 @@
 query getAlbums($page: Int!) {
   albums(options: {paginate: {page: $page, limit: 20}}) {
     data {
+      id
       title
       user {
         name
       }
       photos {
         data {
+          id
           title
           url
           thumbnailUrl

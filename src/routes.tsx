@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import { Faq } from './pages/Faq';
 import { Feed } from './pages/Feed';
@@ -13,7 +13,7 @@ const pagesList: Page[] = [ // Храним данные о имеющихся �
   },
   {
     id: 2,
-    name: 'Faq',
+    name: 'FAQ',
     link: '/faq'
   },
   {

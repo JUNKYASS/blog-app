@@ -1,7 +1,17 @@
 query GetUser($id: ID!) {
   user(id: $id) {
+    id
     name
+    username
     email
+    address {
+      city
+      street
+    }
     phone
+    website
+    company {
+      name
+    }
   }
 }

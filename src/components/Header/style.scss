@@ -1,6 +1,7 @@
 header {
   width: 100%;
   min-height: 64px;
+
   box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.04), 0px 2px 8px rgba(0, 0, 0, 0.08);
 
   & > .inner {
@@ -15,7 +16,7 @@ header {
       width: 40px;
       height: 40px;
 
-      background: linear-gradient(135deg, #FA709A 0%, #FEE140 100%);
+      background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
       border-radius: 50%;
 
       transition: transform 0.4s ease;
@@ -48,7 +49,8 @@ header {
 
           pointer-events: auto;
 
-          &:before { // Хак, исправляет исчезновение выпадающего меню после того, как мы перетаскиваем мышь с аватара на список меню
+          &:before {
+            // Хак, исправляет исчезновение выпадающего меню после того, как мы перетаскиваем мышь с аватара на список меню
             content: "";
 
             display: block;

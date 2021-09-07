@@ -1,10 +1,12 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { gql } from '@apollo/client';
 import * as Apollo from '@apollo/client';
 export type Maybe<T> = T | null;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
-const defaultOptions =  {};
+const defaultOptions = {};
+
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -499,7 +501,6 @@ export type User = {
   todos?: Maybe<TodosPage>;
 };
 
-
 export type UserPostsArgs = {
   options?: Maybe<PageQueryOptions>;
 };
@@ -526,7 +527,7 @@ export type GetAlbumsQueryVariables = Exact<{
 }>;
 
 
-export type GetAlbumsQuery = { __typename?: 'Query', albums?: Maybe<{ __typename?: 'AlbumsPage', data?: Maybe<Array<Maybe<{ __typename?: 'Album', title?: Maybe<string>, user?: Maybe<{ __typename?: 'User', name?: Maybe<string> }>, photos?: Maybe<{ __typename?: 'PhotosPage', data?: Maybe<Array<Maybe<{ __typename?: 'Photo', title?: Maybe<string>, url?: Maybe<string>, thumbnailUrl?: Maybe<string> }>>> }> }>>>, meta?: Maybe<{ __typename?: 'PageMetadata', totalCount?: Maybe<number> }> }> };
+export type GetAlbumsQuery = { __typename?: 'Query', albums?: Maybe<{ __typename?: 'AlbumsPage', data?: Maybe<Array<Maybe<{ __typename?: 'Album', id?: Maybe<string>, title?: Maybe<string>, user?: Maybe<{ __typename?: 'User', name?: Maybe<string> }>, photos?: Maybe<{ __typename?: 'PhotosPage', data?: Maybe<Array<Maybe<{ __typename?: 'Photo', id?: Maybe<string>, title?: Maybe<string>, url?: Maybe<string>, thumbnailUrl?: Maybe<string> }>>> }> }>>>, meta?: Maybe<{ __typename?: 'PageMetadata', totalCount?: Maybe<number> }> }> };
 
 export type GetPostsQueryVariables = Exact<{
   page: Scalars['Int'];
@@ -540,19 +541,21 @@ export type GetUserQueryVariables = Exact<{
 }>;
 
 
-export type GetUserQuery = { __typename?: 'Query', user?: Maybe<{ __typename?: 'User', name?: Maybe<string>, email?: Maybe<string>, phone?: Maybe<string> }> };
+export type GetUserQuery = { __typename?: 'Query', user?: Maybe<{ __typename?: 'User', id?: Maybe<string>, name?: Maybe<string>, username?: Maybe<string>, email?: Maybe<string>, phone?: Maybe<string>, website?: Maybe<string>, address?: Maybe<{ __typename?: 'Address', city?: Maybe<string>, street?: Maybe<string> }>, company?: Maybe<{ __typename?: 'Company', name?: Maybe<string> }> }> };
 
 
 export const GetAlbumsDocument = gql`
     query getAlbums($page: Int!) {
   albums(options: {paginate: {page: $page, limit: 20}}) {
     data {
+      id
       title
       user {
         name
       }
       photos {
         data {
+          id
           title
           url
           thumbnailUrl
@@ -583,32 +586,32 @@ export const GetAlbumsDocument = gql`
  * });
  */
 export function useGetAlbumsQuery(baseOptions: Apollo.QueryHookOptions<GetAlbumsQuery, GetAlbumsQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions};
-        return Apollo.useQuery<GetAlbumsQuery, GetAlbumsQueryVariables>(GetAlbumsDocument, options);
-      }
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<GetAlbumsQuery, GetAlbumsQueryVariables>(GetAlbumsDocument, options);
+}
 export function useGetAlbumsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetAlbumsQuery, GetAlbumsQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions};
-          return Apollo.useLazyQuery<GetAlbumsQuery, GetAlbumsQueryVariables>(GetAlbumsDocument, options);
-        }
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<GetAlbumsQuery, GetAlbumsQueryVariables>(GetAlbumsDocument, options);
+}
 export type GetAlbumsQueryHookResult = ReturnType<typeof useGetAlbumsQuery>;
 export type GetAlbumsLazyQueryHookResult = ReturnType<typeof useGetAlbumsLazyQuery>;
 export type GetAlbumsQueryResult = Apollo.QueryResult<GetAlbumsQuery, GetAlbumsQueryVariables>;
 export const GetPostsDocument = gql`
-    query getPosts($page: Int!) {
-  posts(options: {paginate: {page: $page, limit: 20}}) {
-    data {
-      title
-      body
-      user {
-        name
+  query getPosts($page: Int!) {
+    posts(options: {paginate: {page: $page, limit: 20}}) {
+      data {
+        title
+        body
+        user {
+          name
+        }
+      }
+      meta {
+        totalCount
       }
     }
-    meta {
-      totalCount
-    }
   }
-}
-    `;
+`;
 
 /**
  * __useGetPostsQuery__
@@ -627,25 +630,35 @@ export const GetPostsDocument = gql`
  * });
  */
 export function useGetPostsQuery(baseOptions: Apollo.QueryHookOptions<GetPostsQuery, GetPostsQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions};
-        return Apollo.useQuery<GetPostsQuery, GetPostsQueryVariables>(GetPostsDocument, options);
-      }
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<GetPostsQuery, GetPostsQueryVariables>(GetPostsDocument, options);
+}
 export function useGetPostsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetPostsQuery, GetPostsQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions};
-          return Apollo.useLazyQuery<GetPostsQuery, GetPostsQueryVariables>(GetPostsDocument, options);
-        }
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<GetPostsQuery, GetPostsQueryVariables>(GetPostsDocument, options);
+}
 export type GetPostsQueryHookResult = ReturnType<typeof useGetPostsQuery>;
 export type GetPostsLazyQueryHookResult = ReturnType<typeof useGetPostsLazyQuery>;
 export type GetPostsQueryResult = Apollo.QueryResult<GetPostsQuery, GetPostsQueryVariables>;
 export const GetUserDocument = gql`
-    query GetUser($id: ID!) {
-  user(id: $id) {
-    name
-    email
-    phone
+  query GetUser($id: ID!) {
+    user(id: $id) {
+      id
+      name
+      username
+      email
+      address {
+        city
+        street
+      }
+      phone
+      website
+      company {
+        name
+      }
+    }
   }
-}
-    `;
+`;
 
 /**
  * __useGetUserQuery__
@@ -664,13 +677,13 @@ export const GetUserDocument = gql`
  * });
  */
 export function useGetUserQuery(baseOptions: Apollo.QueryHookOptions<GetUserQuery, GetUserQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions};
-        return Apollo.useQuery<GetUserQuery, GetUserQueryVariables>(GetUserDocument, options);
-      }
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<GetUserQuery, GetUserQueryVariables>(GetUserDocument, options);
+}
 export function useGetUserLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetUserQuery, GetUserQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions};
-          return Apollo.useLazyQuery<GetUserQuery, GetUserQueryVariables>(GetUserDocument, options);
-        }
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<GetUserQuery, GetUserQueryVariables>(GetUserDocument, options);
+}
 export type GetUserQueryHookResult = ReturnType<typeof useGetUserQuery>;
 export type GetUserLazyQueryHookResult = ReturnType<typeof useGetUserLazyQuery>;
 export type GetUserQueryResult = Apollo.QueryResult<GetUserQuery, GetUserQueryVariables>;

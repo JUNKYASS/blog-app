@@ -1,12 +1,10 @@
-import React, { Dispatch, SetStateAction, useState } from 'react';
-
-
+import React from 'react';
+import { ProfileForm } from '../components/ProfileForm';
 
 const Profile: React.FC = () => {
-
   return (
     <section className="Profile">
-      Profile
+      <ProfileForm />
     </section>
   );
 };

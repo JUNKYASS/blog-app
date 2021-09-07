@@ -10,7 +10,7 @@ const DropdownMenu: React.FC = () => {
         pagesList.map(page => {
           return (
             <div className="link" key={page.id}>
-              <Link to={page.link}>{page.name}</Link>
+              <Link to={page.link}>{page.name} page</Link>
             </div>
           );
         })

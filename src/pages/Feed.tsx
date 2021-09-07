@@ -4,8 +4,8 @@ import { Posts } from '../components/Posts';
 import { Tabs, Tab } from '../components/Tabs';
 
 const Feed: React.FC = () => {
-  const [albumsCount, setAlbumsCount] = useState<number>(0);
-  const [postsCount, setPostsCount] = useState<number>(0);
+  const [albumsCount, setAlbumsCount] = useState<number>(0); // Итоговое количество альбомов
+  const [postsCount, setPostsCount] = useState<number>(0); // Итоговое количество постов
 
   const setAlbumsCountHandler = useCallback((count: number) => { // Пробрасываем колбек для установки итогового кол-ва записей альбомов
     console.log('Albums count just has been set');
@@ -25,7 +25,7 @@ const Feed: React.FC = () => {
         <Tab title="Albums" count={albumsCount}>
           <Albums setAlbumsCountHandler={setAlbumsCountHandler} />
         </Tab>
-        <Tab title="Posts" count={1}>
+        <Tab title="Posts" count={postsCount}>
           <Posts setPostsCountHandler={setPostsCountHandler} />
         </Tab>
       </Tabs>
